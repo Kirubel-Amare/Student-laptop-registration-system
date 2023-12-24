@@ -488,7 +488,7 @@
          * @return The method is returning a boolean value, which indicates whether the given laptop Name
          * is valid or not.
          */
-        private  static  boolean isValidLaptop(String laptop){
+        static  boolean isValidLaptop(String laptop){
             boolean vali_laptp = false;
             String [] laptops = {"hp","Dell","Toshiba","apple","chromebook"};
             for (String pc :laptops){
@@ -529,7 +529,7 @@
          * @return The method is returning a boolean value, which indicates whether the age is
          * valid or not.
          */
-        private  static  boolean isValidAge(String age){
+        static  boolean isValidAge(String age){
             boolean validAge = true;
             String valid_age_matches = "[1-9]{1,2}";
 

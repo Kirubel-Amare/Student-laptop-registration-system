@@ -1,10 +1,14 @@
 package edu.haramaya.laptopmanagement;
 
-import org.junit.Test;
-import javax.swing.*;
-import java.awt.*;
-import static org.junit.Assert.*;
 
+import org.junit.Test;
+
+import javax.swing.*;
+
+import java.awt.*;
+
+import static edu.haramaya.laptopmanagement.RegistrationWindow.isValidAge;
+import static org.junit.Assert.*;
 
 public class RegistrationWindowTest {
         @Test

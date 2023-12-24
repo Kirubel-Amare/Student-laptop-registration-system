@@ -157,5 +157,63 @@ public class RegistrationWindowTest {
             JFrame frame = lmanagement.firstFrame;
             assertTrue(frame.isResizable());
         }
+@Test
+        public void testValidSingleDigitAge() {
+            // Valid single-digit age
+            String validSingleDigitAge = "7";
+            assertTrue(isvalidateId(validSingleDigitAge));
+        }
 
+        @Test
+        public void testInvalidNonNumericAge() {
+            // Invalid age (non-numeric)
+            String invalidAge = "abc";
+            assertFalse(isvalidateId(invalidAge));
+        }
+        
+        @Test
+        public void testInvalidZeroAge() {
+            // Invalid age (zero)
+            String invalidAge = "0";
+            assertFalse(isvalidateId(invalidAge));
+        }
+
+        @Test
+        public void testInvalidNegativeAge() {
+            // Invalid age (negative)
+            String invalidAge = "-10";
+            assertFalse(isvalidateId(invalidAge));
+        }
+
+        @Test
+        public void testInvalidAgeWithSpaces() {
+            // Invalid age (contains spaces)
+            String invalidAge = " 35 ";
+            assertFalse(isValidAge(invalidAge));
+        }
+
+        @Test
+        public void testValidLaptop() {
+            // Valid laptop
+            String validLaptop = "hp";
+            assertTrue(isValidLaptop(validLaptop));
+        }
+
+        @Test
+        public void testValidLaptopIgnoreCase() {
+            // Valid laptop (case-insensitive)
+            String validLaptop = "dell";
+            assertTrue(isValidLaptop(validLaptop));
+        }
+        @Test
+        public void test_laptop_name_with_leading_or_trailing_spaces() {
+            boolean result = RegistrationWindow.isValidLaptop(" hp ");
+            assertFalse(result);
+        }
+
+        @Test
+        public void test_valid_laptop_name_in_uppercase() {
+            boolean result = RegistrationWindow.isValidLaptop("DELL");
+            assertTrue(result);
+        }
     }

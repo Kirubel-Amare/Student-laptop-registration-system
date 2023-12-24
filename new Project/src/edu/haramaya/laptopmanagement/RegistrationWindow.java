@@ -162,6 +162,148 @@ public class RegistrationWindow extends LaptopManagement{
         scrollPane.setVisible(true);
         secondFrame.setVisible(true);
 
+        laptopManagement. registerButton.addActionListener(e -> {
+            String url = "jdbc:sqlite:student.db";
+            String Pc_serial = Pc_serialField.getText();
+            String firstname1 = firstnameField.getText();
+            String lastname1 =lastnameField.getText();
+            String student_id1 = student_idField.getText();
+            String laptop1 =laptopField.getText();
+            String department1 =departmentField.getText();
+            String contact1 = contactField.getText();
+            String age1 = ageField.getText();
+            String gender1 = genderField.getText();
+
+            DefaultTableModel model1 = (DefaultTableModel) table.getModel();
+            model1.addRow(new Object[]{Pc_serial, firstname1, lastname1, student_id1, laptop1, department1, contact1, age1, gender1});
+
+            // Clear the input fields
+            Pc_serialField.setText("");
+            firstnameField.setText("");
+            lastnameField.setText("");
+            student_idField.setText("");
+            laptopField.setText("");
+            departmentField.setText("");
+            contactField.setText("");
+            ageField.setText("");
+            genderField.setText("");
+
+            String createTableSql = "CREATE TABLE IF NOT EXISTS student (" +
+                    "Pc_serial String PRIMARY KEY," +
+                    "first_name VARCHAR(50) NOT NULL," +
+                    "last_name VARCHAR(50) NOT NULL," +
+                    "student_id VARCHAR(10) UNIQUE NOT NULL," +
+                    "Laptop VARCHAR(50) NOT NULL," +
+                    "Department VARCHAR(50) NOT NULL," +
+                    "Contact String NOT NULL," +
+                    "age INTEGER NOT NULL," +
+                    "Gender CHAR(1) NOT NULL" +
+                    ");";
+
+            try(
+                    Connection conn = DriverManager.getConnection(url);
+                    Statement stmt = conn.createStatement()){
+
+                stmt.executeUpdate(createTableSql);
+                String insertSql = "INSERT INTO student (Pc_serial, first_name, last_name, Department, Laptop, student_id, Contact, age, Gender) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                PreparedStatement pstmt = conn.prepareStatement(insertSql);
+                pstmt.setString(1, Pc_serial);
+                pstmt.setString(2, firstname1);
+                pstmt.setString(3, lastname1);
+                pstmt.setString(4, department1);
+                pstmt.setString(5, laptop1);
+                pstmt.setString(6, student_id1);
+                pstmt.setString(7, contact1);
+                pstmt.setString(8, age1);
+                pstmt.setString(9, String.valueOf(gender1));
+
+                pstmt.executeUpdate();
+
+            } catch (SQLException ex) {
+                System.err.format("An error occurred: %s", ex.getMessage());
+                JOptionPane.showMessageDialog(null, "error occurred: Pc_serial try again!");
+
+            }
+            firstFrame.dispose();
+        });
+
+        registration.updateButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String url = "jdbc:sqlite:student.db";
+
+                try (Connection conn = DriverManager.getConnection(url);
+                     Statement stmt = conn.createStatement();
+                     Scanner scanner = new Scanner(System.in)) {
+
+                    String Pc_serial = Pc_serialField.getText();
+                    if (Pc_serial.isEmpty()) {
+                        JOptionPane.showMessageDialog(null, "Please enter a serial number");
+                        return;
+                    }
+
+                    Pc_serial = Pc_serialField.getText();
+                    String firstName = firstnameField.getText();
+                    String lastName = lastnameField.getText();
+                    String studentId=student_idField.getText();
+                    String laptop = laptopField.getText();
+                    String department =departmentField.getText();
+                    String contact = contactField.getText();
+                    String age = ageField.getText();
+                    String gender = genderField.getText();
+
+                    String selectSql = "SELECT * FROM student WHERE Pc_serial=?";
+                    PreparedStatement selectStatement = conn.prepareStatement(selectSql);
+                    selectStatement.setString(1, Pc_serial);
+                    ResultSet resultSet = selectStatement.executeQuery();
+
+                    if (resultSet.next()) {
+
+                        // If there is a matching record, retrieve the information
+                        String lastFirstName = resultSet.getString("first_name");
+                        String lastLastName = resultSet.getString("last_name");
+                        String lastStudentId = resultSet.getString("student_id");
+                        String lastLaptop = resultSet.getString("Laptop");
+                        String lastDepartment = resultSet.getString("Department");
+                        String lastContact = resultSet.getString("Contact");
+                        String lastAge = resultSet.getString("age");
+                        String lastGender = resultSet.getString("Gender");
+
+                        // Update the GUI fields with the last information
+                        firstnameField.setText(lastFirstName);
+                        lastnameField.setText(lastLastName);
+                        student_idField.setText(lastStudentId);
+                        laptopField.setText(lastLaptop);
+                        departmentField.setText(lastDepartment);
+                        contactField.setText(lastContact);
+                        ageField.setText(lastAge);
+                        genderField.setText(lastGender);
+
+                        String updateSql = "UPDATE student SET Pc_serial=?, first_name=?, last_name=?, student_id=?, Laptop=?, Department=?, Contact=?, age=?, Gender=? WHERE Pc_serial=?";
+                        PreparedStatement preparedStatement = conn.prepareStatement(updateSql);
+                        preparedStatement.setString(1, Pc_serial);
+                        preparedStatement.setString(2, firstName);
+                        preparedStatement.setString(3, lastName);
+                        preparedStatement.setString(4, studentId);
+                        preparedStatement.setString(5, laptop);
+                        preparedStatement.setString(6, department);
+                        preparedStatement.setString(7, contact);
+                        preparedStatement.setString(8, age);
+                        preparedStatement.setString(9, String.valueOf(gender));
+                        preparedStatement.setString(10, Pc_serial);
+                        preparedStatement.executeUpdate();
+
+                    } else {
+                        // If no matching record is found, display an error message
+                        JOptionPane.showMessageDialog(null, "Record not found for serial number: " + Pc_serialField.getText());
+                    }
+                } catch (SQLException s) {
+                    System.err.format("An error occurred: %s", s.getMessage());
+                    JOptionPane.showMessageDialog(null, "Error occurred. Please try again!");
+                }
+            }
+        });
+
         registration.backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

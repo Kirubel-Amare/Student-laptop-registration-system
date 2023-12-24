@@ -5,6 +5,8 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.beans.Statement;
+import java.sql.*;
 public class RegistrationWindow extends LaptopManagement{
 
     // creating buttons
@@ -232,10 +234,8 @@ public class RegistrationWindow extends LaptopManagement{
             public void actionPerformed(ActionEvent e) {
                 String url = "jdbc:sqlite:student.db";
 
-                try (Connection conn = DriverManager.getConnection(url);
-                     Statement stmt = conn.createStatement();
-                     Scanner scanner = new Scanner(System.in)) {
-
+                try (Connection conn = DriverManager.getConnection(url)){
+ 
                     String Pc_serial = Pc_serialField.getText();
                     if (Pc_serial.isEmpty()) {
                         JOptionPane.showMessageDialog(null, "Please enter a serial number");
@@ -300,9 +300,10 @@ public class RegistrationWindow extends LaptopManagement{
                 } catch (SQLException s) {
                     System.err.format("An error occurred: %s", s.getMessage());
                     JOptionPane.showMessageDialog(null, "Error occurred. Please try again!");
-                }
-            }
+                }  
+        
         });
+    
 
         registration.backButton.addActionListener(new ActionListener() {
             @Override
@@ -334,7 +335,160 @@ public class RegistrationWindow extends LaptopManagement{
 
             }
         });
+    
+
+/**
+     * The function "validateId_input" checks if the input idno is valid by matching it against a
+     * regular expression pattern.
+     *
+     * @param idno The idno parameter is a string representing an identification number.
+     * @return The method is returning a boolean value, which indicates whether the idno input is valid
+     * or not.
+     */
+    private static boolean isvalidateId(String idno){
+        boolean isValidId = true;
+        try {
+            String id_matches = "[0-9/T]{6,8}";
+
+            if(!idno.matches(id_matches)){
+                JOptionPane.showMessageDialog(null, "Please enter a idno (six digit and backslash only).", "Invalid id_No", JOptionPane.ERROR_MESSAGE);
+                isValidId = false;
+            }
+        } catch (Exception e) {
+            e.getMessage();
+        }
+        return isValidId;
+    }
+
+    /**
+     * The function isVAlidName checks if a given input name is valid, meaning it only contains letters
+     * and spaces.
+     *
+     * @param inputname The input name that needs to be validated.
+     * @return The method is returning a boolean value, which indicates whether the input name is valid
+     * or not.
+     */
+    private static boolean isVAlidName(String inputname){
+        boolean isValidName = true;
+        try {
+
+            String name_matches = "[a-zA-Z]+([ -][a-zA-Z]+)*";
+
+            if (!inputname.matches(name_matches)) {
+                JOptionPane.showMessageDialog(null, "Please enter a  correct name (letter s and spaces only).", "Invalid name", JOptionPane.ERROR_MESSAGE);
+                isValidName = false;
+            }
+        } catch (Exception e) {
+            e.getMessage();
+        }
+        return isValidName;
+    }
+
+    /**
+     * The function checks if a given department name is valid, which means it only contains letters
+     * and spaces.
+     *
+     * @param department The parameter "department" is a string that represents the name of a
+     * department.
+     * @return The method is returning a boolean value, which indicates whether the department name is
+     * valid or not.
+     */
+    private static  boolean isValidDepartment(String department){
+        boolean isvalidDep = true;
+
+        try {
+            String departmen_matches  = "^[a-zA-Z\\s]+$";
+
+            if (!department.matches(departmen_matches)) {
+                JOptionPane.showMessageDialog(null, "Please enter a  correct department name (letters and spaces only).", "Invalid department name", JOptionPane.ERROR_MESSAGE);
+                isvalidDep = false;
+            }
+        } catch (Exception e) {
+            e.getMessage();
+        }
+        return isvalidDep;
+    }
+
+    /**
+     * The function checks if a given serial number is valid by matching it against a regular
+     * expression pattern.
+     *
+     * @param serialNumber The serial number of a PC.
+     * @return The method is returning a boolean value, which indicates whether the given serial number
+     * is valid or not.
+     */
+    private static boolean isValidSerialNumber(String serialNumber) {
+        boolean isValidSerial = true;
+        try {
+            String pcSerialNumber_matches = "[a-zA-Z0-9]{6,12}";
+
+            if (!serialNumber.matches(pcSerialNumber_matches)) {
+                JOptionPane.showMessageDialog(null, "Please enter a  correct your pc serail Number (letters and number only).", "Invalid pc serial number", JOptionPane.ERROR_MESSAGE);
+                isValidSerial = false;
+            }
+
+        } catch (Exception e) {
+            e.getMessage();
+        }
+        return isValidSerial;
+    }
+
+    /**
+     * The function checks if a given laptop name is valid by comparing with correct laptop  name
+     * @return The method is returning a boolean value, which indicates whether the given laptop Name
+     * is valid or not.
+     */
+    private  static  boolean isValidLaptop(String laptop){
+        boolean vali_laptp = false;
+        String [] laptops = {"hp","Dell","Toshiba","apple","chromebook"};
+        for (String pc :laptops){
+            if (pc.equalsIgnoreCase(laptop)){
+                return  true;
+            }
+        }
+        return  vali_laptp;
+    }
+
+    /**
+     * The function isvalidContactNumber checks if a given contact number is valid by matching it
+     * against a regular expression pattern.
+     *
+     * @param contactNumber The contact number that needs to be validated.
+     * @return The method is returning a boolean value, which indicates whether the contact number is
+     * valid or not.
+     */
+    private static boolean  isvalidContactNumber(String contactNumber){
+        boolean isValidContact = true;
+
+        try {
+            String contact_matches = "^09[0-9]{8}";
+
+            if (!contactNumber.matches(contact_matches)) {
+                JOptionPane.showMessageDialog(null, "Please enter a  correct your contact Number (start with 09 and can't exceed 10 digit).", "Invalid contact Number", JOptionPane.ERROR_MESSAGE);
+                isValidContact = false;
+            }
+        } catch (Exception e) {
+            e.getMessage();
+        }
+        return isValidContact;
+    }
+    /**
+     * The function is validAge checks if a given  age is valid by matching it
+     * against a regular expression pattern.
+     // @param validAge The contact number that needs to be validated.
+     * @return The method is returning a boolean value, which indicates whether the age is
+     * valid or not.
+     */
+    private  static  boolean isValidAge(String age){
+        boolean validAge = true;
+        String valid_age_matches = "[1-9]{1,2}";
+
+        if(!(age.matches(valid_age_matches))){
+            JOptionPane.showMessageDialog(null, "Please enter a  correct age.", "Invalid Age", JOptionPane.ERROR_MESSAGE);
+            validAge = false;
+        }
+        return  validAge;
+
     }
 }
-
-
+}

@@ -8,7 +8,7 @@ It provides a user-friendly GUI for managing laptop records, performs CRUD opera
 
 ## Features
 
- GUI for easy interaction: 
+GUI for easy interaction: 
 
 The system offers an intuitive graphical interface built using Java Swing, making it accessible to users of all technical levels.
 
@@ -22,7 +22,7 @@ Stores all laptop information in a MySQL database for reliable persistence and e
 Data integrity: Validates user input to prevent errors and maintain data consistency.
 CRUD operations: Supports the creation, reading, updating, and deletion of laptop records in the database.
 
-## Technologies Used
+ Technologies Used
 
 Java (object orientented programming language)
 MySQL (database)

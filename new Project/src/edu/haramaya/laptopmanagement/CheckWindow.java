@@ -141,6 +141,36 @@ public class CheckWindow extends RegistrationWindow{
             }
         });
 
+            registrationWindow.deleteButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String URL = "jdbc:sqlite:student.db";
+                String pcSerial = serialField.getText();
+
+                try (Connection conn = DriverManager.getConnection(URL);
+                     Statement stmt = conn.createStatement()) {
+                    String deleteQuery = "DELETE FROM student WHERE Pc_serial = ?";
+                    PreparedStatement pstmt = conn.prepareStatement(deleteQuery);
+                    pstmt.setString(1, pcSerial);
+
+                    int rowCount = pstmt.executeUpdate();
+
+
+                    if (rowCount>0){
+                        deleted.setVisible(true);
+
+                    } else {
+                        JOptionPane.showMessageDialog(null, "No student found with the given serial number.");
+
+                    }
+
+                } catch (SQLException f) {
+                    JOptionPane.showMessageDialog(null, "An error occurred while deleting student data.");
+                    f.printStackTrace();
+                }
+            }
+        });
+
         registrationWindow.exitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

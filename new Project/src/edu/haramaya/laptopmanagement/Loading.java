@@ -2,7 +2,7 @@ package edu.haramaya.laptopmanagement;
 
 import java.awt.*;
 import javax.swing.*;
-public class Loading extends LoginPage{
+public class Loading {
     JFrame frame = new JFrame();
     JProgressBar bar = new JProgressBar(0,100);
     JLabel titleLabel = new JLabel(" HARAMAYA UNIVERSITY ");
@@ -67,6 +67,7 @@ public class Loading extends LoginPage{
 
             after += 1;
         }
+        new LoginPage();
         frame.dispose();
     }
 }

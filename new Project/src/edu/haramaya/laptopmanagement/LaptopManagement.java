@@ -21,7 +21,7 @@ public class LaptopManagement {
     }
 
     public static void main(String[] args) {
-        openRegistrationFirstWindow();
+        new Loading();
 
 
     }
@@ -74,8 +74,8 @@ public class LaptopManagement {
 
         lmanagement.registerButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                firstFrame.setVisible(false);
                 RegistrationWindow.openRegistrationWindow();
+                firstFrame.setVisible(false);
                 firstFrame.dispose();
             }
         });
@@ -83,6 +83,7 @@ public class LaptopManagement {
         lmanagement.checkButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                CheckWindow.openRegistrationCheckWindow();
                 firstFrame.setVisible(false);
                 firstFrame.dispose();
             }

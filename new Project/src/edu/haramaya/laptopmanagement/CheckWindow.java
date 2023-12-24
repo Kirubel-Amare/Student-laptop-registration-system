@@ -74,8 +74,73 @@ public class CheckWindow extends RegistrationWindow{
                 thirdWindow.dispose();
             }
         });
-
         
+            checkWindow.enterButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String pcSerial = serialField.getText();
+                String url = "jdbc:sqlite:student.db";
+
+                try (Connection conn = DriverManager.getConnection(url);
+                     PreparedStatement stmt = conn.prepareStatement("SELECT * FROM student WHERE Pc_serial = ?")) {
+
+                    stmt.setString(1, pcSerial);
+                    ResultSet rs = stmt.executeQuery();
+
+                    if (rs.next()) {
+                        String department = rs.getString("Department");
+                        String laptop = rs.getString("Laptop");
+                        int contact = rs.getInt("Contact");
+                        String firstName = rs.getString("first_name");
+                        String lastName = rs.getString("last_name");
+                        String studentId = rs.getString("student_id");
+                        int age = rs.getInt("age");
+                        char gender = rs.getString("Gender").charAt(0);
+
+                        // Create a new JFrame to display student information
+                        JFrame infoFrame = new JFrame("Student Information");
+                        infoFrame.setSize(500, 400);
+
+                        infoFrame.getContentPane().setBackground(new Color(0x2ecc71));
+                        infoFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+                        // Create a JPanel to hold the information
+                        JPanel infoPanel = new JPanel();
+                        infoPanel.setLayout(new GridLayout(8, 2));
+
+                        // Add labels and values to the panel
+                        infoPanel.add(new JLabel("First Name:"));
+                        infoPanel.add(new JLabel(firstName));
+                        infoPanel.add(new JLabel("Last Name:"));
+                        infoPanel.add(new JLabel(lastName));
+                        infoPanel.add(new JLabel("Student ID:"));
+                        infoPanel.add(new JLabel(studentId));
+                        infoPanel.add(new JLabel("Laptop:"));
+                        infoPanel.add(new JLabel(laptop));
+                        infoPanel.add(new JLabel("Department:"));
+                        infoPanel.add(new JLabel(department));
+                        infoPanel.add(new JLabel("Contact:"));
+                        infoPanel.add(new JLabel(String.valueOf(contact)));
+                        infoPanel.add(new JLabel("Age:"));
+                        infoPanel.add(new JLabel(String.valueOf(age)));
+                        infoPanel.add(new JLabel("Gender:"));
+                        infoPanel.add(new JLabel(String.valueOf(gender)));
+
+                        // Add the panel to the frame
+                        infoFrame.add(infoPanel);
+
+                        // Set the frame to be visible
+                        infoFrame.setVisible(true);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "No student found with the specified serial number.");
+                    }
+
+                } catch (SQLException s) {
+                    System.err.format("An error occurred: %s", s.getMessage());
+                }
+            }
+        });
+
         registrationWindow.exitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

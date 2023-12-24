@@ -171,6 +171,28 @@ public class CheckWindow extends RegistrationWindow{
             }
         });
 
+            checkWindow.formatButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                String URL = "jdbc:sqlite:student.db";
+                String sql = "DROP TABLE student";
+
+                try {
+                    Connection connection = DriverManager.getConnection(URL);
+                    Statement statement = connection.createStatement();
+                    statement.executeUpdate(sql);
+                    statement.close();
+                    connection.close();
+
+                    format.setVisible(true);
+
+                } catch (SQLException u) {
+                    System.out.println("Error dropping table: " + u.getMessage());
+                }
+            }
+        });
+
         registrationWindow.exitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

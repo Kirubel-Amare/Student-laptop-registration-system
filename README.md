@@ -8,18 +8,16 @@ It provides a user-friendly GUI for managing laptop records, performs CRUD opera
 
 ## Features
 
-## GUI for easy interaction: 
+ GUI for easy interaction: 
 
 The system offers an intuitive graphical interface built using Java Swing, making it accessible to users of all technical levels.
 
-## Comprehensive laptop management:
+Comprehensive laptop management:
 
 Register new laptops with details such as serial number,laptop type,user contact number, assigned user, and status.
 View, update, and delete existing laptop records.
 Track laptop assignments and availability.
-
-## Secure database storage: 
-
+Secure database storage: 
 Stores all laptop information in a MySQL database for reliable persistence and easy retrieval.
 Data integrity: Validates user input to prevent errors and maintain data consistency.
 CRUD operations: Supports the creation, reading, updating, and deletion of laptop records in the database.
@@ -30,17 +28,14 @@ Java (object orientented programming language)
 MySQL (database)
 Java Swing (GUI library)
 
-## Installation
-
-## Prerequisites:
+## Installation prerequisites 
 
 Ensure you have latest version Java Development Kit (JDK) and MySQL installed on your system.
 Download the project files from the repository.
 Set up MySQL database:
 Create a new database named laptop_management_system (or any preferred name).
 Import the laptop_management_system.sql file to create the necessary tables and structure.
-
-Use code with caution. Learn more
+Use code with caution. 
 Run the application:
 Open the project in your preferred IDE.
 Navigate to the main class (likely LaptopManagement.java).

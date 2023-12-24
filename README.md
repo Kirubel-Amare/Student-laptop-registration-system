@@ -8,17 +8,17 @@ It provides a user-friendly GUI for managing laptop records, performs CRUD opera
 
 ## Features
 
-# GUI for easy interaction: 
+## GUI for easy interaction: 
 
 The system offers an intuitive graphical interface built using Java Swing, making it accessible to users of all technical levels.
 
-# Comprehensive laptop management:
+## Comprehensive laptop management:
 
 Register new laptops with details such as serial number,laptop type,user contact number, assigned user, and status.
 View, update, and delete existing laptop records.
 Track laptop assignments and availability.
 
-# Secure database storage: 
+## Secure database storage: 
 
 Stores all laptop information in a MySQL database for reliable persistence and easy retrieval.
 Data integrity: Validates user input to prevent errors and maintain data consistency.
@@ -32,7 +32,7 @@ Java Swing (GUI library)
 
 ## Installation
 
-# Prerequisites:
+## Prerequisites:
 
 Ensure you have latest version Java Development Kit (JDK) and MySQL installed on your system.
 Download the project files from the repository.
@@ -61,10 +61,10 @@ Create a branch for your changes.
 Make your changes and commit them with descriptive messages.
 Create a pull request to merge your changes into the main branch
 
-# Licensing
+## Licensing
 This project is released under the MIT License. Please refer to the LICENSE file for more details.
 
-# Links and Resources
+## Links and Resources
 project repository : [ https://github.com/Kirubel-Amare/Student-laptop-registration-system/tree/main]
 
 

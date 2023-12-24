@@ -1,39 +1,30 @@
-
 package edu.haramaya.laptopmanagement;
 
-import org.junit.jupiter.api.Test;
-
+import org.junit.Test;
 import javax.swing.*;
 import java.awt.*;
+import static org.junit.Assert.*;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-    public class RegistrationWindowTest {
-
+public class RegistrationWindowTest {
         @Test
         public void testValidId() {
             String validId = "123456/";
             assertFalse(isvalidateId(validId));
         }
-
         @Test
         public void testInvalidIdMessage() {
             String invalidId = "abc123";
             assertFalse(isvalidateId(invalidId));
             // You can add additional assertions to check the error message if needed
         }
-
         @Test
         public void testExceptionHandling() {
             // Mocking a situation where an exception occurs (e.g., null input)
             assertFalse(isvalidateId(null));
         }
-
         private boolean isvalidateId(Object o) {
             return false;
         }
-
-
         @Test
         public void testNameValidation() {
             // Valid name
@@ -70,8 +61,6 @@ import static org.junit.jupiter.api.Assertions.*;
             String departmentRegex = "^[a-zA-Z\\s]+$";
             return department.matches(departmentRegex);
         }
-
-
         @Test
         public void testSerialNumberValidation() {
             // Valid serial number
@@ -109,7 +98,6 @@ import static org.junit.jupiter.api.Assertions.*;
             String contactNumberRegex = "^09[0-9]{8}";
             return contactNumber.matches(contactNumberRegex);
         }
-
 
         @Test
         public void testInvalidLaptopEmpty() {
@@ -150,6 +138,7 @@ import static org.junit.jupiter.api.Assertions.*;
             LaptopManagement lmanagement = new LaptopManagement();
             lmanagement.openRegistrationFirstWindow();
             JFrame frame = lmanagement.firstFrame;
+
             JLabel titleLabel = (JLabel) frame.getContentPane().getComponent(0);
             JLabel titleLabel2 = (JLabel) frame.getContentPane().getComponent(1);
             JLabel titleLabel3 = (JLabel) frame.getContentPane().getComponent(2);
@@ -168,6 +157,5 @@ import static org.junit.jupiter.api.Assertions.*;
             JFrame frame = lmanagement.firstFrame;
             assertTrue(frame.isResizable());
         }
-
 
     }

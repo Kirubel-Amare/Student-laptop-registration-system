@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.*;
 
 public class CheckWindow extends RegistrationWindow{
 
@@ -17,7 +18,6 @@ public class CheckWindow extends RegistrationWindow{
         formatButton=new JButton("Format");
     }
     public static void openRegistrationCheckWindow() {
-
         // object creation
         RegistrationWindow registrationWindow = new CheckWindow();
         CheckWindow checkWindow = new CheckWindow();
@@ -88,7 +88,7 @@ public class CheckWindow extends RegistrationWindow{
                     ResultSet rs = stmt.executeQuery();
 
                     if (rs.next()) {
-                        String department = rs.getString("Department");
+                        String department = ((ResultSet) rs).getString("Department");
                         String laptop = rs.getString("Laptop");
                         int contact = rs.getInt("Contact");
                         String firstName = rs.getString("first_name");
@@ -137,6 +137,7 @@ public class CheckWindow extends RegistrationWindow{
 
                 } catch (SQLException s) {
                     System.err.format("An error occurred: %s", s.getMessage());
+
                 }
             }
         });

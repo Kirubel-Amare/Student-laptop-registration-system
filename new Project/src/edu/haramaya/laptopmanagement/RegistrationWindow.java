@@ -5,9 +5,8 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.beans.Statement;
 import java.sql.*;
-public class RegistrationWindow extends LaptopManagement{
+  public class RegistrationWindow extends LaptopManagement{
 
     // creating buttons
     protected JButton updateButton ;
@@ -176,7 +175,7 @@ public class RegistrationWindow extends LaptopManagement{
             String age1 = ageField.getText();
             String gender1 = genderField.getText();
 
-                        boolean valid_pc_serial = isValidSerialNumber(Pc_serial);
+            boolean valid_pc_serial = isValidSerialNumber(Pc_serial);
             if (!(valid_pc_serial)){
                 Pc_serialField.setForeground(Color.RED);
                 Pc_serialField.setText("");
@@ -369,9 +368,11 @@ public class RegistrationWindow extends LaptopManagement{
                 } catch (SQLException s) {
                     System.err.format("An error occurred: %s", s.getMessage());
                     JOptionPane.showMessageDialog(null, "Error occurred. Please try again!");
-                }  
+                }
+            }
         
         });
+
     
 
         registration.backButton.addActionListener(new ActionListener() {
@@ -403,8 +404,9 @@ public class RegistrationWindow extends LaptopManagement{
                 genderField.setText("");
 
             }
+
         });
-    
+    }
 
 /**
      * The function "validateId_input" checks if the input idno is valid by matching it against a
@@ -559,5 +561,4 @@ public class RegistrationWindow extends LaptopManagement{
         return  validAge;
 
     }
-}
 }

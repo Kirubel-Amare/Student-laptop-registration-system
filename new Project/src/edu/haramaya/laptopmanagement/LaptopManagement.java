@@ -19,11 +19,8 @@ public class LaptopManagement {
         exitButton = new JButton("Exit");
         checkButton = new JButton("Check");
     }
-
     public static void main(String[] args) {
         new Loading();
-
-
     }
     public static void openRegistrationFirstWindow() {
 

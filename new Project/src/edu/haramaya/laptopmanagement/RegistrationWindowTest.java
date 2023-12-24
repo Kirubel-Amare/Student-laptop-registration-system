@@ -5,6 +5,7 @@ import javax.swing.*;
 import java.awt.*;
 import static org.junit.Assert.*;
 
+
 public class RegistrationWindowTest {
         @Test
         public void testValidId() {
@@ -148,7 +149,6 @@ public class RegistrationWindowTest {
             assertEquals(new Color(0xffffff), titleLabel.getForeground());
             assertEquals(new Font("SANS_SERIF", Font.BOLD, 25), titleLabel.getFont());
             assertEquals(new Rectangle(340, 90, 600, 100), titleLabel.getBounds());
-
         }
         @Test
         public void test_main_window_cannot_be_resized() {

@@ -176,6 +176,75 @@ public class RegistrationWindow extends LaptopManagement{
             String age1 = ageField.getText();
             String gender1 = genderField.getText();
 
+                        boolean valid_pc_serial = isValidSerialNumber(Pc_serial);
+            if (!(valid_pc_serial)){
+                Pc_serialField.setForeground(Color.RED);
+                Pc_serialField.setText("");
+                Pc_serialField.setText("invalid pc_serial");
+                return;
+            }
+
+            boolean validFirstName = isVAlidName(firstname1);
+            if (!(validFirstName)){
+                firstnameField.setForeground(Color.RED);
+                firstnameField.setText("");
+                firstnameField.setText("invalid name");
+                return;
+            }
+
+            boolean validLastName = isVAlidName(lastname1);
+            if(!(validLastName)){
+                lastnameField.setForeground(Color.RED);
+                lastnameField.setText("");
+                lastnameField.setText("invalid name");
+                return;
+            }
+
+            boolean valid_id =  isvalidateId(student_id1);
+            if (!(valid_id)){
+                student_idField.setForeground(Color.RED);
+                student_idField.setText("");
+                student_idField.setText("ivalidid");
+                return;
+            }
+
+            boolean valid_laptop = isValidLaptop(laptop1);
+            if(!(valid_laptop)){
+                laptopField.setText("");
+                laptopField.setForeground(Color.RED);
+                laptopField.setText("invalid laptop name");
+                return;
+            }
+
+            boolean valid_department = isValidDepartment(department1);
+            if (!(valid_department)){
+                departmentField.setText("");
+                departmentField.setForeground(Color.RED);
+                departmentField.setText("incorrect department name");
+                return;
+            }
+
+            boolean valid_contact = isvalidContactNumber(contact1);
+            if (!(valid_contact)){
+                contactField.setText("");
+                contactField.setForeground(Color.RED);
+                contactField.setText("incorrect phone number");
+                return;
+            }
+
+            boolean validAge = isValidAge(age1);
+            if (!(validAge)){
+                ageField.setText("");
+                ageField.setForeground(Color.RED);
+                ageField.setText("incorrect age");
+                return;
+            }
+
+            if (!(gender1.equals("F") || gender1.equals("M") ||gender1.equals("m") || gender1.equals("f") ) ){
+                genderField.setText("invalid sex");
+                return;
+            }
+
             DefaultTableModel model1 = (DefaultTableModel) table.getModel();
             model1.addRow(new Object[]{Pc_serial, firstname1, lastname1, student_id1, laptop1, department1, contact1, age1, gender1});
 
